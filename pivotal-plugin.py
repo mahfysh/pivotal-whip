@@ -29,8 +29,11 @@ def check_stories(project_id, token):
 
         d = dateutil.parser.parse(i['updated_at'])
         updated = d.strftime('%d/%m/%Y')
+
+        # I think that when a task is started for more than 3 days, it should be reviewed
         outdated = datetime.today() - timedelta(days=3)
         outdated = outdated.strftime('%d/%m/%Y')
+
         date_created = datetime.strptime(updated, '%d/%m/%Y')
         today = datetime.strptime(outdated, '%d/%m/%Y')
 
