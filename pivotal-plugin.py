@@ -5,22 +5,18 @@ import json
 from datetime import datetime, timedelta
 import dateutil.parser
 
-TOKEN = 'c2eca6f7846c710f411882380c4cf9ee'
-
 PROJECTS = ['1980391',  # random
             '1856655']  # appunite general
-
-FILTER = '?filter=state:started'
-headers = {'content-type': 'application/json', 'Accept-Charset': 'UTF-8', 'X-TrackerToken': TOKEN}
-data = {'current_state': 'started'}
 
 # TODO update to slack channel
 
 
-def check_stories(project_id):
+def check_stories(project_id, token):
 
+    url_filter = '?filter=state:started'
+    headers = {'content-type': 'application/json', 'Accept-Charset': 'UTF-8', 'X-TrackerToken': token}
     project_url = "https://www.pivotaltracker.com/services/v5/projects/" + project_id + "/stories/"
-    url = project_url + FILTER
+    url = project_url + url_filter
     print("Checking", project_id, project_url)
 
     r = requests.get(url, headers=headers)
@@ -50,10 +46,12 @@ def check_stories(project_id):
 
     print("\n")
 
+
 def main():
 
+    new_token = input('Input Pivotal API token: ')
     for project in PROJECTS:
-        check_stories(project)
+        check_stories(project, new_token)
 
 
 if __name__ == '__main__':
