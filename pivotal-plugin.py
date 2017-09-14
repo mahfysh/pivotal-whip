@@ -41,6 +41,7 @@ def check_stories(project_id, token):
             # if r.status_code != 200:
             #     print('fuck')
 
+
         else:
             print(i['id'], "is ok")
 
